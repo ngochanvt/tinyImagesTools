@@ -11,13 +11,42 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
        
     </head>
-    <div class="container">
-        <div class="row form-control">
-            <input type="file" id="input_images" multiple>
-            <button type="button" id="button_submit">Submit</button>
-        </div>
-    </div>
+    
     <body>
+        <style type="text/css">
+            #wait{
+                  display: none;
+                }
+            .lds-dual-ring {
+                width: 64px;
+                height: 64px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 25%;
+                margin: auto;
+            }   
+            .lds-dual-ring:after {
+                content: " ";
+                display: block;
+                width: 46px;
+                height: 46px;
+                margin: 1px;
+                border-radius: 50%;
+                border: 5px solid #7386D5;
+                border-color: #7386D5 transparent #7386D5 transparent;
+                animation: lds-dual-ring 1.2s linear infinite;
+            }
+        </style>
+        <div id='wait' class='bg-wait'>
+            <div class="lds-dual-ring" ></div>
+        </div>
+        <div class="container">
+            <div class="row form-control">
+                <input type="file" id="input_images" multiple>
+                <button type="button" id="button_submit">Submit</button>
+            </div>
+        </div>
         <script type="text/javascript" src="<?=$base_url?>assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>    
@@ -82,6 +111,12 @@
                      }
                });
             })
+            $(document).ajaxStart(function(){
+                $("#wait").css("display", "block");
+            });
+            $(document).ajaxComplete(function(){
+                $("#wait").css("display", "none");
+            });
         </script>
     </body>
 </html>
